@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15472972972972973" />
         <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll/app/src/main/res/layout/activity_sign_up.xml" value="0.16" />
       </map>
     </option>
   </component>
