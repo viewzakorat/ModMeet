@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "256093347124",
+    "project_id": "video-meeting-b1731",
+    "storage_bucket": "video-meeting-b1731.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256093347124:android:52b08bb8062c38d8a81961",
+        "android_client_info": {
+          "package_name": "com.example.modvideoll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256093347124-n1ahlbjvl210pbk2auol1mvak50vqo5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC54Bgg5pcYcoAeIzZkxEHEoVnNaWHGMK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256093347124-n1ahlbjvl210pbk2auol1mvak50vqo5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
