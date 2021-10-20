@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    tools:context=".SignInActivity">
+    tools:context=".activities.SignInActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSignIn"
                 android:layout_width="150dp"
                 android:layout_height="60dp"

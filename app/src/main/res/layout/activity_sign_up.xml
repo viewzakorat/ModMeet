@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    tools:context=".SignUpActivity">
+    tools:context=".activities.SignUpActivity">
 
   <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
@@ -95,13 +95,24 @@
           android:inputType="textPassword"
           android:padding="10dp" />
 
-      <Button
-          android:id="@+id/buttonSignUp"
-          android:layout_width="150dp"
-          android:layout_height="60dp"
-          android:layout_gravity="center"
-          android:layout_marginTop="5dp"
-          android:text="สร้างบัญชีผู้ใช้" />
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSignUp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="สร้างบัญชีผู้ใช้" />
+        <ProgressBar
+            android:id = "@+id/signUpProgressBar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
+      </FrameLayout>
 
       <Button
           android:id="@+id/ButtonSignIn"
@@ -114,4 +125,5 @@
 
     </LinearLayout>
   </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

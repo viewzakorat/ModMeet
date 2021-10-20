@@ -19,6 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.HashMap;
+
 
 public class SignInActivity extends AppCompatActivity {
     Button ButtonSignUp;
@@ -33,25 +35,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-                FirebaseFirestore database = FirebaseFirestore.getInstance();
-                HashMap<String, Object> user = new HashMap<>();
-                user.put("first_name", "John");
-                user.put("last_name", "Doe");
-                user.put("email", "test@gmail.com");
-                database.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(SignInActivity.this, "User Inserted", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(SignInActivity.this, "Error addind user", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
             }
         });
 
