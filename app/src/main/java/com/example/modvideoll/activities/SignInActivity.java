@@ -51,6 +51,7 @@ public class SignInActivity extends AppCompatActivity {
     buttonSignIn = findViewById(R.id.buttonSignIn);
     signInProgressBar = findViewById(R.id.signInProgressBar);
 
+
     buttonSignIn.setOnClickListener(v1 -> {
         if(inputEmail.getText().toString().trim().isEmpty()){
             Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
