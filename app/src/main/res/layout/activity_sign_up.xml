@@ -105,10 +105,11 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:text="สร้างบัญชีผู้ใช้" />
+
         <ProgressBar
-            android:id = "@+id/signUpProgressBar"
+            android:id="@+id/signUpProgressBar"
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="13dp"
             android:layout_gravity="center"
             android:visibility="invisible" />
 

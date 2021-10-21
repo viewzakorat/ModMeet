@@ -65,6 +65,14 @@
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
+            <ProgressBar
+                android:id="@+id/signInProgressBar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+
+                android:visibility="invisible" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSignIn"
                 android:layout_width="150dp"
@@ -73,13 +81,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="เข้าสู่ระบบ" />
-
-            <ProgressBar
-                android:id="@+id/signInProgressBar"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:visibility="invisible"
-                />
 
             <Button
                 android:id="@+id/ButtonSignUp"

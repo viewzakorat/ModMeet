@@ -43,30 +43,27 @@ public class SignInActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         ButtonSignUp = findViewById(R.id.ButtonSignUp);
-        ButtonSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        ButtonSignUp.setOnClickListener(v -> {
+                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+                });
+    inputEmail = findViewById(R.id.inputEmail);
+    inputPassword = findViewById(R.id.inputPassword);
+    buttonSignIn = findViewById(R.id.buttonSignIn);
+    signInProgressBar = findViewById(R.id.signInProgressBar);
 
-        inputEmail = findViewById(R.id.inputEmail);
-        inputPassword = findViewById(R.id.inputPassword);
-        buttonSignIn = findViewById(R.id.buttonSignIn);
-        signInProgressBar = findViewById(R.id.signInProgressBar);
+    buttonSignIn.setOnClickListener(v1 -> {
+        if(inputEmail.getText().toString().trim().isEmpty()){
+            Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()){
+            Toast.makeText(SignInActivity.this, "Enter Valid email", Toast.LENGTH_SHORT).show();
+        }else if(inputPassword.getText().toString().trim().isEmpty()){
+            Toast.makeText(SignInActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+        }else {
+            signIn();
+        }
+    });
 
-        buttonSignIn.setOnClickListener(v1 -> {
-            if(inputEmail.getText().toString().trim().isEmpty()){
-                Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-            }else if(!Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()){
-                Toast.makeText(SignInActivity.this, "Enter Valid email", Toast.LENGTH_SHORT).show();
-            }else if(inputPassword.getText().toString().trim().isEmpty()){
-                Toast.makeText(SignInActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
-            }else {
-                signIn();
-            }
-        });
 
-            }
-        });
 
     }
 
