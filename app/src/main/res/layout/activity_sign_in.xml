@@ -74,6 +74,13 @@
                 android:layout_marginBottom="10dp"
                 android:text="เข้าสู่ระบบ" />
 
+            <ProgressBar
+                android:id="@+id/signInProgressBar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="invisible"
+                />
+
             <Button
                 android:id="@+id/ButtonSignUp"
                 android:layout_width="150dp"
