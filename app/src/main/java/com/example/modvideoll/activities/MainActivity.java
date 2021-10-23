@@ -3,16 +3,17 @@ package com.example.modvideoll.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.modvideoll.R;
 import com.example.modvideoll.adapter.UsersAdapter;
+import com.example.modvideoll.listeners.UsersListener;
 import com.example.modvideoll.models.User;
 import com.example.modvideoll.utilities.Constants;
 import com.example.modvideoll.utilities.PreferenceManager;
@@ -29,13 +30,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UsersListener {
 
     private PreferenceManager preferenceManager;
     private List<User> users;
     private UsersAdapter usersAdapter;
     private TextView textErrorMessage;
-    private ProgressBar usersProgressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,50 +60,49 @@ public class MainActivity extends AppCompatActivity {
         });
         RecyclerView userRecyclerView = findViewById(R.id.usersRecyclerView);
         textErrorMessage = findViewById(R.id.textErrorMessage);
-        usersProgressBar = findViewById(R.id.usersProgerssBar);
-
 
         users = new ArrayList<>();
-        usersAdapter = new UsersAdapter(users);
+        usersAdapter = new UsersAdapter(users,this);
         userRecyclerView.setAdapter(usersAdapter);
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this::getUsers);
 
         getUsers();
 
     }
 
     private  void getUsers(){
-        usersProgressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        usersProgressBar.setVisibility(View.GONE);
-                        String  myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
-                        if(task.isSuccessful() && task.getResult() != null ){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                if(myUserId.equals(documentSnapshot.getId())){
-                                    continue;
-                                }
-                                User user = new User();
-                                user.name = documentSnapshot.getString(Constants.KEY_NAME);
-                                user.email = documentSnapshot.getString(Constants.KEY_EMAIL);
-                                user.token = documentSnapshot.getString(Constants.KEY_FCM_TOKEN);
-                                users.add(user);
+                .addOnCompleteListener(task -> {
+                    swipeRefreshLayout.setRefreshing(false);
+                    String  myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
+                    if(task.isSuccessful() && task.getResult() != null ){
+                        users.clear();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                            if(myUserId.equals(documentSnapshot.getId())){
+                                continue;
                             }
-                            if(users.size() > 0){
-                                usersAdapter.notifyDataSetChanged();
-                            } else {
-                                textErrorMessage.setText(String.format("%s","No users available"));
-                                textErrorMessage.setVisibility(View.VISIBLE);
-
-                            }
-
-                        }else{
+                            User user = new User();
+                            user.name = documentSnapshot.getString(Constants.KEY_NAME);
+                            user.email = documentSnapshot.getString(Constants.KEY_EMAIL);
+                            user.token = documentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                            users.add(user);
+                        }
+                        if(users.size() > 0){
+                            usersAdapter.notifyDataSetChanged();
+                        } else {
                             textErrorMessage.setText(String.format("%s","No users available"));
                             textErrorMessage.setVisibility(View.VISIBLE);
+
                         }
+
+                    }else{
+                        textErrorMessage.setText(String.format("%s","No users available"));
+                        textErrorMessage.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -133,5 +133,39 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 })
                 .addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Unable to Sign out", Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public void initiateVideomeeting(User user) {
+        if(user.token == null || user.token.trim().isEmpty()){
+            Toast.makeText(
+                    /*context:*/this,
+                    /*text:*/user.name + "" + "is not available for meeting",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }else{
+            Toast.makeText(
+                    /*context:*/this,
+                    /*text*/"Video meeting with"+ user.name+"",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+    }
+
+    @Override
+    public void initiateAudiomeeting(User user) {
+        if(user.token == null || user.token.trim().isEmpty()){
+            Toast.makeText(
+                    /*context:*/this,
+                    /*text:*/user.name + "" + "is not available for meeting",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }else{
+            Toast.makeText(
+                    /*context:*/this,
+                    /*text*/"Audio meeting with"+ user.name+"",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
     }
 }
