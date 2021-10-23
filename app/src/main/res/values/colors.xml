@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FF5722</color>
     <color name="gray">#A6A6A6</color>
+    <color name="colorTextIcons">#FFFFFF</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorHintText">#BDBDBD</color>
+    <color name="colorMeetingInvitationStart">#4004BB</color>
+    <color name="colorMeetingInvitationEnd">#8A1AAA</color>
+
 </resources>
