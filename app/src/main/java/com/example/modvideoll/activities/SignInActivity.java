@@ -41,28 +41,33 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         preferenceManager = new PreferenceManager(getApplicationContext());
+        if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         ButtonSignUp = findViewById(R.id.ButtonSignUp);
         ButtonSignUp.setOnClickListener(v -> {
-                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-                });
-    inputEmail = findViewById(R.id.inputEmail);
-    inputPassword = findViewById(R.id.inputPassword);
-    buttonSignIn = findViewById(R.id.buttonSignIn);
-    signInProgressBar = findViewById(R.id.signInProgressBar);
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        });
+        inputEmail = findViewById(R.id.inputEmail);
+        inputPassword = findViewById(R.id.inputPassword);
+        buttonSignIn = findViewById(R.id.buttonSignIn);
+        signInProgressBar = findViewById(R.id.signInProgressBar);
 
 
-    buttonSignIn.setOnClickListener(v1 -> {
-        if(inputEmail.getText().toString().trim().isEmpty()){
-            Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-        }else if(!Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()){
-            Toast.makeText(SignInActivity.this, "Enter Valid email", Toast.LENGTH_SHORT).show();
-        }else if(inputPassword.getText().toString().trim().isEmpty()){
-            Toast.makeText(SignInActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
-        }else {
-            signIn();
-        }
-    });
+        buttonSignIn.setOnClickListener(v1 -> {
+            if(inputEmail.getText().toString().trim().isEmpty()){
+                Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()){
+                Toast.makeText(SignInActivity.this, "Enter Valid email", Toast.LENGTH_SHORT).show();
+            }else if(inputPassword.getText().toString().trim().isEmpty()){
+                Toast.makeText(SignInActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+            }else {
+                signIn();
+            }
+        });
 
 
 
@@ -81,6 +86,7 @@ public class SignInActivity extends AppCompatActivity {
                     if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0){
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                        preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
                         preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putString(Constants.KEY_EMAIL, documentSnapshot.getString(Constants.KEY_EMAIL));
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
