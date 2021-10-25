@@ -29,7 +29,6 @@ import java.util.HashMap;
 
 
 public class SignInActivity extends AppCompatActivity {
-    Button ButtonSignUp;
     private EditText inputEmail, inputPassword;
     private MaterialButton buttonSignIn;
     private ProgressBar signInProgressBar;
@@ -46,11 +45,9 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        findViewById(R.id.ButtonSignUp).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),SignUpActivity.class)));
 
-        ButtonSignUp = findViewById(R.id.ButtonSignUp);
-        ButtonSignUp.setOnClickListener(v -> {
-            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-        });
+
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         buttonSignIn = findViewById(R.id.buttonSignIn);
