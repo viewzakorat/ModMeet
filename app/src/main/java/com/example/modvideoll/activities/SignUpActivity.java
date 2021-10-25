@@ -67,17 +67,48 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
     }
-
     private void signUp(){
 
         buttonSignUp.setVisibility(View.INVISIBLE);
         signUpProgressBar.setVisibility(View.VISIBLE);
+
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String, Object> user = new HashMap<>();
         user.put(Constants.KEY_NAME, inputName.getText().toString()); //ของเรามีแค่ชื่อ ไม่ม่ Firstname Lastname
         user.put(Constants.KEY_EMAIL, inputEmail.getText().toString());
         user.put(Constants.KEY_PASSWORD, inputPassword.getText().toString());
+
         database.collection(Constants.KEY_COLLECTION_USERS)
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
+
+                        preferenceManager.putString(Constants.KEY_NAME, inputName.getText().toString());
+                        preferenceManager.putString(Constants.KEY_EMAIL, inputEmail.getText().toString());
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        signUpProgressBar.setVisibility(View.INVISIBLE);
+                        buttonSignUp.setVisibility(View.VISIBLE);
+                        Toast.makeText(SignUpActivity.this,"Error"+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                });
+
+
+        FirebaseFirestore database1 = FirebaseFirestore.getInstance();
+        database1.collection(Constants.KEY_COLLECTION_USERS)
+                .whereEqualTo(Constants.KEY_EMAIL, inputEmail.getText().toString())
+                .whereEqualTo(Constants.KEY_PASSWORD, inputPassword.getText().toString())
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0){
@@ -89,16 +120,10 @@ public class SignUpActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                    }else {
                         signUpProgressBar.setVisibility(View.INVISIBLE);
                         buttonSignUp.setVisibility(View.VISIBLE);
-                        Toast.makeText(SignUpActivity.this,"Error"+e.getMessage(),Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(SignUpActivity.this, "Unable to sign in", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -106,3 +131,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
