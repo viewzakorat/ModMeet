@@ -25,8 +25,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +40,7 @@ import retrofit2.Response;
 public class OutgoingInvitationActivity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     private String inviterToken = null;
+    String meetingRoom = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +113,13 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
             data.put(Constants.KEY_EMAIL, preferenceManager.getString(Constants.KEY_EMAIL));
             data.put(Constants.REMOTE_MSG_INVITER_TOKEN, inviterToken);
 
+            meetingRoom =
+                    preferenceManager.getString(Constants.KEY_USER_ID) + "_" +
+                            UUID.randomUUID().toString().substring(0,5);
+            data.put(Constants.REMOTE_MSG_MEETING_ROOM, meetingRoom);
+
+
+
             body.put(Constants.REMOTE_MSG_DATA, data);
             body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
 
@@ -176,8 +189,22 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent){
             String type = intent.getStringExtra(Constants.REMOTE_MSG_INVITATION_RESPONSE);
             if(type !=null){
-                if(type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)){
-                    Toast.makeText(context, /*text:*/"Invitation Acceptd", Toast.LENGTH_SHORT).show();
+                if(type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
+                    try {
+                        URL serverURL = new URL("https://meet.jit.si");
+                        JitsiMeetConferenceOptions conferenceOptions =
+                                new JitsiMeetConferenceOptions.Builder()
+                                        .setServerURL(serverURL)
+                                        .setWelcomePageEnabled(false)
+                                        .setRoom(meetingRoom)
+                                        .build();
+                        JitsiMeetActivity.launch(OutgoingInvitationActivity.this, conferenceOptions);
+                        finish();
+                    } catch (Exception exception){
+                    Toast.makeText(context, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
+                    }
+
                 }else if (type.equals(Constants.REMOTE_MSG_INVITATION_REJECTED)){
                     Toast.makeText(context, /*text:*/"Invitation Rejected", Toast.LENGTH_SHORT).show();
                     finish();
@@ -185,6 +212,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     protected void onStart(){
         super.onStart();
