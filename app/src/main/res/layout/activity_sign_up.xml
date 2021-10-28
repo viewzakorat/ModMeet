@@ -5,15 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:background="@color/white"
     tools:context=".activities.SignUpActivity">
+
 
   <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="50dp"
-      android:layout_marginRight="50dp"
-      app:cardCornerRadius="15dp"
+      android:layout_height="match_parent"
+      android:scrollbarThumbHorizontal="@color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -21,16 +20,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_height="800dp"
+        android:background="@color/white"
         android:orientation="vertical">
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center">
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/yod"/>
+      <TextView
+          android:id="@+id/textView8"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Register"
+          android:layout_gravity="center"
+          android:textColor="#FFFFFF"
+          android:textSize="@dimen/_10sdp"
+          tools:ignore="MissingConstraints" />
+      </FrameLayout>
+
 
       <ImageButton
           android:id="@+id/imageButton2"
           android:layout_width="200dp"
           android:layout_height="200dp"
           android:layout_gravity="center"
-          android:layout_marginTop="20dp"
+          android:layout_marginTop="50dp"
           android:layout_marginBottom="10dp"
           android:scaleType="fitStart"
           android:visibility="visible"
@@ -43,11 +63,10 @@
           android:layout_marginLeft="20dp"
           android:layout_marginTop="10dp"
           android:layout_marginRight="20dp"
-          android:background="@drawable/textbox"
           android:drawableLeft="@drawable/profileicon"
           android:drawablePadding="25dp"
           android:ems="10"
-          android:hint="ชื่อผู้ใช้งาน"
+          android:hint="๊Username"
           android:inputType="textPersonName"
           android:padding="10dp" />
 
@@ -58,11 +77,10 @@
           android:layout_marginLeft="20dp"
           android:layout_marginTop="10dp"
           android:layout_marginRight="20dp"
-          android:background="@drawable/textbox"
           android:drawableLeft="@drawable/email"
           android:drawablePadding="25dp"
           android:ems="10"
-          android:hint="EmailAddress"
+          android:hint="Email"
           android:inputType="textEmailAddress"
           android:padding="10dp" />
 
@@ -73,13 +91,13 @@
           android:layout_marginLeft="20dp"
           android:layout_marginTop="10dp"
           android:layout_marginRight="20dp"
-          android:background="@drawable/textbox"
           android:drawableLeft="@drawable/password"
           android:drawablePadding="25dp"
           android:ems="10"
           android:hint="Password"
           android:inputType="textPassword"
           android:padding="10dp" />
+
       <EditText
           android:id="@+id/inputConfirmPassword"
           android:layout_width="match_parent"
@@ -87,7 +105,6 @@
           android:layout_marginLeft="20dp"
           android:layout_marginTop="10dp"
           android:layout_marginRight="20dp"
-          android:background="@drawable/textbox"
           android:drawableLeft="@drawable/password"
           android:drawablePadding="25dp"
           android:ems="10"
@@ -97,14 +114,19 @@
 
       <FrameLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          >
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSignUp"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_style"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="สร้างบัญชีผู้ใช้" />
+            android:text="Sign Up"
+            android:textSize="13sp"
+            app:backgroundTint="@color/yod"/>
 
 
         <ProgressBar
@@ -116,16 +138,39 @@
 
       </FrameLayout>
 
-      <Button
-          android:id="@+id/ButtonSignIn"
-          android:layout_width="150dp"
-          android:layout_height="60dp"
-          android:layout_gravity="center"
-          android:layout_marginTop="10dp"
-          android:layout_marginBottom="10dp"
-          android:text="มีบัญชีผู้ใช้งานอยู่ก่อนแล้ว" />
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center">
+        <TextView
+            android:id="@+id/TextForSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginTop="30dp"
+            android:text="Already have an account?"
+            android:textSize="12sp"
+            app:iconTint="@color/black" />
+
+        <TextView
+            android:id="@+id/ButtonSignIn"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="30dp"
+            android:text="Sign-in ►"
+            android:textColor="@color/yod"
+            android:textSize="12sp" />
+
+      </FrameLayout>
+
+
+
 
     </LinearLayout>
   </androidx.cardview.widget.CardView>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

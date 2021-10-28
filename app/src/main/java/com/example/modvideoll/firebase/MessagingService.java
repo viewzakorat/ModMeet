@@ -23,11 +23,11 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        String type = remoteMessage.getData().get(Constants.REMOTE_MSG_TYPE);
+        String type = remoteMessage.getData().get(Constants.REMOTE_MSG_TYPE);  /*clip9*/
 
         if(type != null){
             if(type.equals(Constants.REMOTE_MSG_INVITATION)){
-                Intent intent = new Intent(getApplicationContext(), IncomingInvitationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), IncomingInvitationActivity.class); /*clip9ทั้งหมดถึงล่างเลย*/
                 intent.putExtra(
                         Constants.KEY_NAME,
                         remoteMessage.getData().get(Constants.REMOTE_MSG_TYPE)
@@ -50,7 +50,7 @@ public class MessagingService extends FirebaseMessagingService {
                 );
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent); /*clip9ถึงนี่!*/
 
             }else if(type.equals(Constants.REMOTE_MSG_INVITATION_RESPONSE)){
                 Intent intent = new Intent(Constants.REMOTE_MSG_INVITATION_RESPONSE);

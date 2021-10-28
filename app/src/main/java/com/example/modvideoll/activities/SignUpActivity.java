@@ -25,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
-    Button  ButtonSignIn;
     private EditText inputName, inputEmail, inputPassword, inputConfirmPassword;
     private MaterialButton buttonSignUp;
     private ProgressBar signUpProgressBar;
@@ -36,10 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         preferenceManager = new PreferenceManager(getApplicationContext());
-        ButtonSignIn = findViewById(R.id.ButtonSignIn);
-        ButtonSignIn.setOnClickListener(v -> {
-            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));  //เปลี่ยนหน้า อันนี้ทำเอง Note! ของเรามีปุ่มกลับปุ่มเดียว
-        });
+        findViewById(R.id.ButtonSignIn).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),SignInActivity.class)));
         inputName = findViewById(R.id.inputName);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);

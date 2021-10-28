@@ -103,17 +103,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="120dp"
                     android:layout_marginRight="120dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="if you haven't signed up for a modmeet account, please"
                     android:textSize="12sp"
                     app:iconTint="@color/black" />
 
                 <TextView
                     android:id="@+id/ButtonSignUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="Register ►"
                     android:textColor="@color/yod"
                     android:textSize="12sp" />

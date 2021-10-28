@@ -38,8 +38,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OutgoingInvitationActivity extends AppCompatActivity {
-    private PreferenceManager preferenceManager;
-    private String inviterToken = null;
+    private PreferenceManager preferenceManager; /*clip9*/
+    private String inviterToken = null; /*clip9*/
     String meetingRoom = null;
 
     @Override
@@ -47,7 +47,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_outgoing_invitation);
-        preferenceManager= new PreferenceManager(getApplicationContext());
+        preferenceManager= new PreferenceManager(getApplicationContext()); /*clip9*/
 
 
         ImageView imageMeetingType = findViewById(R.id.imageMeetingType);
@@ -81,12 +81,12 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         });
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
+            @Override      /*clip9 เขาย่อ*/
             public void onComplete(@NonNull Task<InstanceIdResult> task) {
                 if(task.isSuccessful() && task.getResult() != null){
                     inviterToken = task.getResult().getToken();
                     if(meetingType != null && user != null){
-                        initiateMeeting(meetingType, user.token);
+                        initiateMeeting(meetingType, user.token); /*clip9*/
                     }
                 }
             }
@@ -100,14 +100,14 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
 
     private void initiateMeeting(String meetingType, String receiverToken){
         try {
-
+            /*clip9*/
             JSONArray tokens = new JSONArray();
             tokens.put(receiverToken);
 
             JSONObject body = new JSONObject();
             JSONObject data = new JSONObject();
 
-            data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INVITATION);
+            data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INVITATION); /*Note data=>JSON object*/
             data.put(Constants.REMOTE_MSG_MEETING_TYPE,meetingType);
             data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME));
             data.put(Constants.KEY_EMAIL, preferenceManager.getString(Constants.KEY_EMAIL));
@@ -137,7 +137,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
 
       private void sendRemoteMessage(String remoteMessageBody,String type){
             ApiClient.getClient().create(ApiService.class).sendRemoteMessage(
-                Constants.getRemoteMessageHeaders(), remoteMessageBody
+                Constants.getRemoteMessageHeaders(), remoteMessageBody /*clip9*/
         ).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {

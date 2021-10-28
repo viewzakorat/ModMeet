@@ -72,21 +72,6 @@
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/layoutHeader" />
 
-            <View
-                android:id="@+id/viewDivider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:background="@color/gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/recentbox"
-                app:layout_constraintTop_toBottomOf="@+id/recentbox"
-                app:layout_constraintVertical_bias="0.0" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/usersRecyclerView"
                 android:layout_width="match_parent"
