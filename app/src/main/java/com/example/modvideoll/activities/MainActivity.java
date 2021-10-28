@@ -1,9 +1,12 @@
 package com.example.modvideoll.activities;
 
+import static android.view.View.VISIBLE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.example.modvideoll.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,13 +42,14 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
     private UsersAdapter usersAdapter;
     private TextView textErrorMessage;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView textFirstChar,textUsername,textEmail;
+    private ImageView imageVideoMeeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        preferenceManager = new PreferenceManager(getApplicationContext());
+         preferenceManager = new PreferenceManager(getApplicationContext());
 
         TextView textTitle = findViewById(R.id.textTitle);
         textTitle.setText(String.format(
@@ -71,7 +76,14 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
 
         getUsers();
 
+
+
+
+
+
     }
+
+
 
     private  void getUsers(){
         swipeRefreshLayout.setRefreshing(true);
@@ -91,19 +103,20 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
                             user.name = documentSnapshot.getString(Constants.KEY_NAME);
                             user.email = documentSnapshot.getString(Constants.KEY_EMAIL);
                             user.token = documentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                            user.permission= documentSnapshot.getString(Constants.KEY_PERMISSION);
                             users.add(user);
                         }
                         if(users.size() > 0){
                             usersAdapter.notifyDataSetChanged();
                         } else {
                             textErrorMessage.setText(String.format("%s","No users available"));
-                            textErrorMessage.setVisibility(View.VISIBLE);
+                            textErrorMessage.setVisibility(VISIBLE);
 
                         }
 
                     }else{
                         textErrorMessage.setText(String.format("%s","No users available"));
-                        textErrorMessage.setVisibility(View.VISIBLE);
+                        textErrorMessage.setVisibility(VISIBLE);
                     }
                 });
     }
@@ -153,23 +166,12 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
 
             startActivity(intent);
         }
+
     }
 
     @Override
     public void initiateAudiomeeting(User user) {
-        if(user.token == null || user.token.trim().isEmpty()){
-            Toast.makeText(
-                    /*context:*/this,
-                    /*text:*/user.name + "" + " is not available for meeting",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }else{
-            Toast.makeText(
-                    /*context:*/this,
-                    /*text*/"Audio meeting with"+ user.name+"",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
 
     }
+
 }

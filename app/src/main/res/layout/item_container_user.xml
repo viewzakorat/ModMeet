@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:keepScreenOn="true"
+
     android:padding="@dimen/_5sdp">
     <TextView
         android:id="@+id/textFirstChar"
@@ -15,14 +17,20 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_22ssp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+
+        />
     <View
         android:id="@+id/viewSupporter"
         android:layout_width="1dp"
         android:layout_height="1dp"
         app:layout_constraintBottom_toBottomOf="@id/textFirstChar"
         app:layout_constraintStart_toEndOf="@id/textFirstChar"
-        app:layout_constraintTop_toTopOf="@id/textFirstChar" />
+        app:layout_constraintTop_toTopOf="@id/textFirstChar"
+
+
+        />
 
 
     <ImageView
@@ -35,7 +43,10 @@
         app:tint="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/viewDivider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf= "parent"/>
+        app:layout_constraintTop_toTopOf= "parent"
+
+
+        />
 
     <ImageView
         android:id="@+id/imageAudioMeeting"
@@ -49,9 +60,7 @@
         app:layout_constraintBottom_toTopOf="@id/viewDivider"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/imageVideoMeeting"
-
-
-        />
+         />
 
     <TextView
         android:id="@+id/textUsername"
@@ -66,7 +75,10 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toTopOf="@+id/viewSupporter"
         app:layout_constraintEnd_toStartOf="@+id/imageAudioMeeting"
-        app:layout_constraintStart_toEndOf="@+id/textFirstChar" />
+        app:layout_constraintStart_toEndOf="@+id/textFirstChar"
+
+
+        />
 
     <TextView
         android:id="@+id/textEmail"
@@ -82,6 +94,9 @@
         app:layout_constraintEnd_toStartOf="@id/imageAudioMeeting"
         app:layout_constraintStart_toEndOf="@+id/textFirstChar"
         app:layout_constraintTop_toBottomOf="@+id/viewSupporter"
+
+
+
         />
 
 
@@ -98,6 +113,9 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textFirstChar"
         app:layout_constraintTop_toBottomOf="@+id/textFirstChar"
+
+
+
         app:layout_constraintVertical_bias="0.0" />
 
 

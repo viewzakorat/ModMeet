@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.modvideoll.R;
@@ -54,6 +56,7 @@ public class SignInActivity extends AppCompatActivity {
         signInProgressBar = findViewById(R.id.signInProgressBar);
 
 
+
         buttonSignIn.setOnClickListener(v1 -> {
             if(inputEmail.getText().toString().trim().isEmpty()){
                 Toast.makeText(SignInActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
@@ -62,7 +65,8 @@ public class SignInActivity extends AppCompatActivity {
             }else if(inputPassword.getText().toString().trim().isEmpty()){
                 Toast.makeText(SignInActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
             }else {
-                signIn();
+                 signIn();
+
             }
         });
 
@@ -70,11 +74,15 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    private void signIn(){
+
+        private void signIn(){
+
         buttonSignIn.setVisibility(View.INVISIBLE);
         signInProgressBar.setVisibility(View.VISIBLE);
 
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .whereEqualTo(Constants.KEY_EMAIL, inputEmail.getText().toString())
                 .whereEqualTo(Constants.KEY_PASSWORD, inputPassword.getText().toString())

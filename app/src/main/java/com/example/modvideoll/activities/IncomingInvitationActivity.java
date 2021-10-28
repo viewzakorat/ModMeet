@@ -19,7 +19,9 @@ import com.example.modvideoll.network.ApiClient;
 import com.example.modvideoll.network.ApiService;
 import com.example.modvideoll.utilities.Constants;
 
+import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetActivityDelegate;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,6 +64,10 @@ public class IncomingInvitationActivity extends AppCompatActivity {
         textEmail.setText(getIntent().getStringExtra(Constants.KEY_EMAIL));
 
         ImageView imageAcceptInvitation = findViewById(R.id.imageAcceptInvitation);
+        sendInvitationResponse(
+                Constants.REMOTE_MSG_INVITATION_ACCEPTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN));
+
         imageAcceptInvitation.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
