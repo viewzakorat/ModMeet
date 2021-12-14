@@ -62,6 +62,12 @@ public class IncomingInvitationActivity extends AppCompatActivity {
         textEmail.setText(getIntent().getStringExtra(Constants.KEY_EMAIL));
 
         ImageView imageAcceptInvitation = findViewById(R.id.imageAcceptInvitation);
+
+
+        sendInvitationResponse(
+                Constants.REMOTE_MSG_INVITATION_ACCEPTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)
+        );
         imageAcceptInvitation.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

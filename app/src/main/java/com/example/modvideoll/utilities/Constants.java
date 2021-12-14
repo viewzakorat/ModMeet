@@ -11,8 +11,14 @@ public class Constants {
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_FCM_TOKEN = "fcm_token";
 
+    public static final String KEY_MAIN_PERMISSION = "Main_Permission";
+    public static final String KEY_PERMISSION = "permission";
+    public static final String KEY_PERMISSION_PATIENT = "PATIENT";
+
     public static final String KEY_PREFERENCE_NAME = "videoMeetingPreference";
     public static final String KEY_IS_SIGNED_IN = "isSignedIn";
+
+
 
     public static final String REMOTE_MSG_AUTHORIZATION = "Authorization"; /*clip9*/
     public static final String REMOTE_MSG_CONTENT_TYPE ="Content-Type"; /*clip9*/

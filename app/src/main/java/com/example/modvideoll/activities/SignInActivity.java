@@ -83,9 +83,15 @@ public class SignInActivity extends AppCompatActivity {
                     if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0){
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+
+
+                        String MainKeyPermission =documentSnapshot.getString(Constants.KEY_PERMISSION);
+                        preferenceManager.putString(Constants.KEY_MAIN_PERMISSION, MainKeyPermission);
+
                         preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
                         preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putString(Constants.KEY_EMAIL, documentSnapshot.getString(Constants.KEY_EMAIL));
+
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
                             user.name = documentSnapshot.getString(Constants.KEY_NAME);
                             user.email = documentSnapshot.getString(Constants.KEY_EMAIL);
                             user.token = documentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                            user.permission = documentSnapshot.getString(Constants.KEY_PERMISSION);
+                            user.selfPermission=  preferenceManager.getString(Constants.KEY_MAIN_PERMISSION);
+
                             users.add(user);
                         }
                         if(users.size() > 0){
@@ -157,19 +160,10 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
 
     @Override
     public void initiateAudiomeeting(User user) {
-        if(user.token == null || user.token.trim().isEmpty()){
-            Toast.makeText(
-                    /*context:*/this,
-                    /*text:*/user.name + "" + " is not available for meeting",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }else{
-            Toast.makeText(
-                    /*context:*/this,
-                    /*text*/"Audio meeting with"+ user.name+"",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
+        Toast.makeText(
+                /*context:*/this,
+                /*text:*/user.name + "" + " is not available for meeting",
+                Toast.LENGTH_SHORT).show();
 
     }
 }

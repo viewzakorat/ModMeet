@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/activity_incoming_invitation.xml" value="0.1" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/activity_outgoing_invitation.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/activity_sign_in.xml" value="0.4" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/activity_sign_up.xml" value="0.4" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/layout/item_container_user.xml" value="0.16" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.40546875" />
+        <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModMeet5/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.40546875" />
         <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll.app/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll.app/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Users/Traisit/AndroidStudioProjects/ModVideoll.app/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />

@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:includeFontPadding="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="Sign Out"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="12dp" />
 
     </LinearLayout>
@@ -97,6 +97,18 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/layoutHeader" />
 
+    <TextView
+        android:id="@+id/WaitScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wait for doctor"
+        android:textSize="@dimen/_30sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="@+id/swipeRefreshLayout"
+        app:layout_constraintStart_toStartOf="@+id/swipeRefreshLayout"
+        app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout"
+        android:visibility="invisible"/>
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchUser"
         android:layout_width="match_parent"
@@ -109,6 +121,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutHeader"
-        app:showAsAction="ifRoom|collapseActionView" />/>
+        app:showAsAction="ifRoom|collapseActionView"
+        android:visibility="invisible"
+        />/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

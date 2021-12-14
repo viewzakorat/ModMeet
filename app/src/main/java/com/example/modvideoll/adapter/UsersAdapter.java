@@ -1,5 +1,8 @@
 package com.example.modvideoll.adapter;
 
+import static com.example.modvideoll.utilities.Constants.*;
+
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.modvideoll.R;
 import com.example.modvideoll.listeners.UsersListener;
 import com.example.modvideoll.models.User;
+import com.example.modvideoll.utilities.Constants;
+import com.example.modvideoll.utilities.PreferenceManager;
 
 import java.util.List;
 
@@ -46,11 +51,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public int getItemCount() {
         return users.size();
     }
-
     class UserViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textFirstChar,textUsername, textEmail;
+        TextView textFirstChar,textUsername, textEmail,WaitScreen;
         ImageView imageAudioMeeting, imageVideoMeeting;
+         View viewDivider;
+
 
         public UserViewHolder(@NonNull View itemView){
             super(itemView);
@@ -59,11 +65,21 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             textEmail = itemView.findViewById(R.id.textEmail);
             imageAudioMeeting = itemView.findViewById(R.id.imageAudioMeeting);
             imageVideoMeeting = itemView.findViewById(R.id.imageVideoMeeting);
+            viewDivider = itemView.findViewById(R.id.viewDivider);
+            WaitScreen = itemView.findViewById(R.id.WaitScreen);
+
         }
         void setUserData(User user){
+            PreferenceManager preferenceManager;
+
             textFirstChar.setText(user.name.substring(0,1));
             textUsername.setText(user.name);
-            textEmail.setText(user.email);
+            textEmail.setText(user.permission);
+           // WaitScreen.setVisibility(View.VISIBLE);
+
+            setVisibility(user.selfPermission);
+
+
             imageAudioMeeting.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -76,6 +92,26 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                     usersListener.initiateVideomeeting(user);
                 }
             });
+
+        }
+        void setVisibility(String permission){
+            if(permission.equals(KEY_PERMISSION_PATIENT)){
+
+                textFirstChar.setVisibility(View.INVISIBLE);
+                textUsername.setVisibility(View.INVISIBLE);
+                textEmail.setVisibility(View.INVISIBLE);
+                viewDivider.setVisibility(View.INVISIBLE);
+                imageVideoMeeting.setVisibility(View.INVISIBLE);
+            }else{
+
+                textFirstChar.setVisibility(View.VISIBLE);
+                textUsername.setVisibility(View.VISIBLE);
+                textEmail.setVisibility(View.VISIBLE);
+                viewDivider.setVisibility(View.VISIBLE);
+                imageVideoMeeting.setVisibility(View.VISIBLE);
+               // WaitScreen.setVisibility(View.INVISIBLE);
+
+            }
 
         }
 
